@@ -31,8 +31,15 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// the ":=" operator is used to declare and assign the value
+	// int a = 10 is the same as a := 10
+	// http.Dir(“xxx”) : returns a filesystem.
+	// In this case, the collection of files will be the list of files present in the folder we passed as an input to http.Dir()
+	// http.FileServer(): It takes a filesystem(return value http.Dir()) and creates an handler.
+	// The handler will in turn return all the files listed by http.Dir to the client, that is why to access the form you need to go to the form.html url
 	fileServer := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fileServer)
+	// Because of the index file the root "/" will return a static page (index)
 	http.HandleFunc("/form", formHandler)
 	http.HandleFunc("/hello", helloHandler)
 
