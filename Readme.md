@@ -1,0 +1,1 @@
+This is a static web server in go for acedemic purposes.
