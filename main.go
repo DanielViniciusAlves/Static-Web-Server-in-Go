@@ -1,21 +1,22 @@
 package main
 
 import (
-	"fmt"
+	// the dot (.) make the use of fmt when using its functions unecessary
+	. "fmt"
 	"log"
 	"net/http"
 )
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		fmt.Fprintf(w, "Parseform() err: %v", err)
+		Fprintf(w, "Parseform() err: %v", err)
 		return
 	}
-	fmt.Fprintf(w, "POST request successful")
+	Fprintf(w, "POST request successful")
 	name := r.FormValue("name")
 	address := r.FormValue("address")
-	fmt.Fprintf(w, "name = %s\n", name)
-	fmt.Fprintf(w, "address = %s\n", address)
+	Fprintf(w, "name = %s\n", name)
+	Fprintf(w, "address = %s\n", address)
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +28,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "methos not found", http.StatusNotFound)
 		return
 	}
-	fmt.Fprintf(w, "Hello!")
+	Fprintf(w, "Hello!")
 }
 
 func main() {
@@ -43,7 +44,7 @@ func main() {
 	http.HandleFunc("/form", formHandler)
 	http.HandleFunc("/hello", helloHandler)
 
-	fmt.Printf("Server Started!")
+	Printf("Server Started!")
 	if err := http.ListenAndServe(":8000", nil); err != nil {
 		log.Fatal(err)
 	}
